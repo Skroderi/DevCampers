@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 const logger = require("./middleware/logger");
 const morgan = require("morgan");
 const connectDB = require("./config/db");
-
+const errorHandler = require("./middleware/error");
 // load env vars
 
 dotenv.config({ path: "./config/config.env" });
@@ -28,6 +28,8 @@ app.use(logger);
 
 // Mount routers
 app.use("/api/v1/bootcamps", bootcamps);
+
+app.use(errorHandler);
 
 const PORT = process.env.PORT;
 
